@@ -14,7 +14,13 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Context\" />
+    <Reference Include="ElectronicJournal_Library">
+      <HintPath>..\..\ElectronicJournal_Library\ElectronicJournal_Library\bin\Debug\netstandard2.0\ElectronicJournal_Library.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="TestsOfWork\" />
   </ItemGroup>
 
 </Project>
