@@ -1,111 +1,60 @@
 ﻿using System;
 using ElectronicJournal_DataBase.Context;
 using ElectronicJournal_DataBase.Model;
+using System.Linq;
 using ElectronicJournal_Library;
-
+using Microsoft.EntityFrameworkCore;
 namespace ElectronicJournal_DataBase
 {
 	class Program
 	{
 		static void Main(string[] args)
 		{
-			//AccessLevel alStud = new AccessLevel { /*AccessLevelId = 1,*/ AccessLevelName = "Студент" };
-			//AccessLevel alStarosta = new AccessLevel {/* AccessLevelId = 2,*/ AccessLevelName = "Староста" };
-			//AccessLevel alTeacher = new AccessLevel {/* AccessLevelId = 3,*/ AccessLevelName = "Преподаватель" };
-			//AccessLevel alDekanat = new AccessLevel { /*AccessLevelId = 4,*/ AccessLevelName = "Деканат" };
-			//AccessLevel alAdmin = new AccessLevel { /*AccessLevelId = 5,*/ AccessLevelName = "Админ" };
-
-
 			using (ElectronicJournalContext db = new ElectronicJournalContext())
 			{
-				//AccessLevel alStud = new AccessLevel {AccessLevelId=1, AccessLevelName = "Студент" };
-				//AccessLevel alStarosta = new AccessLevel { AccessLevelId = 2, AccessLevelName = "Староста" };
-				//AccessLevel alTeacher = new AccessLevel { AccessLevelId = 3, AccessLevelName = "Преподаватель" };
-				//AccessLevel alDekanat = new AccessLevel { AccessLevelId = 4, AccessLevelName = "Деканат" };
-				//AccessLevel alAdmin = new AccessLevel { AccessLevelId = 5, AccessLevelName = "Админ" };
-				//db.AccessLevels.Add(alStud);
-				//db.AccessLevels.Add(alStarosta);
-				//db.AccessLevels.Add(alTeacher);
-				//db.AccessLevels.Add(alDekanat);
-				//db.AccessLevels.Add(alAdmin);
 
-				//Password pasStudent = new Password("1111");
-				//User studentUser = new User
-				//{
-				//	UserId = 1,
-				//	FirstName = "Student",
-				//	LastName = "Studentovich",
-				//	Login = "Student_1",
-				//	PasswordSalt = pasStudent.PasswordSalt,
-				//	PasswordHash = pasStudent.PasswordHash,
-				//	AccessLevelId = 1,
-				//	Phone = new string('1', 12),
-				//	Email = "student@mail.ru"
-				//};
-				//Password pasStarosta = new Password("2222");
-				//User starostaUser = new User
-				//{
-				//	UserId = 2,
-				//	FirstName = "Starosta",
-				//	LastName = "Starostovich",
-				//	Login = "Starosta_1",
-				//	PasswordSalt = pasStarosta.PasswordSalt,
-				//	PasswordHash = pasStarosta.PasswordHash,
-				//	AccessLevelId = 2,
-				//	Phone = new string('2', 12),
-				//	Email = "starosta@mail.ru"
-				//};
-				//Password pasPrepod = new Password("3333");
-				//User teacherUser = new User
-				//{
-				//	UserId = 3,
-				//	FirstName = "Prepod",
-				//	LastName = "Prepodovich",
-				//	Login = "Prepod_1",
-				//	PasswordSalt = pasPrepod.PasswordSalt,
-				//	PasswordHash = pasPrepod.PasswordHash,
-				//	AccessLevelId = 2,
-				//	Phone = new string('3', 12),
-				//	Email = "prepod@mail.ru"
-				//};
-				//Password pasDekanat = new Password("4444");
-				//User dekanatUser = new User
-				//{
-				//	UserId = 4,
-				//	FirstName = "Dekanat",
-				//	LastName = "Dekanat",
-				//	Login = "Dekanat_1",
-				//	PasswordSalt = pasDekanat.PasswordSalt,
-				//	PasswordHash = pasDekanat.PasswordHash,
-				//	AccessLevelId = 4,
-				//	Phone = new string('4', 12),
-				//	Email = "dekanat@mail.ru"
-				//};
+				var al = db.AccessLevels;
+				foreach (AccessLevel level in al)
+				{
+					Console.WriteLine($"{level.AccessLevelId}" + ": " + $"{level.AccessLevelName}");
+				}
 
-				//Password pasAdmin = new Password("5555");
-				//User adminUser = new User
-				//{
-				//	UserId = 5,
-				//	FirstName = "Admin",
-				//	LastName = "Admin",
-				//	Login = "Admin_1",
-				//	PasswordSalt = pasAdmin.PasswordSalt,
-				//	PasswordHash = pasAdmin.PasswordHash,
-				//	AccessLevelId = 5,
-				//	Phone = new string('5', 12),
-				//	Email = "admin@mail.ru"
-				//};
+				var test_us = db.Users.Select(us => new Person
+				{
+					Name = us.FirstName + " " + us.LastName,
+					AccessLevel = us.AccessLevel.AccessLevelName
+				});
 
-				//db.Users.Add(studentUser);
-				//db.Users.Add(starostaUser);
-				//db.Users.Add(teacherUser);
-				//db.Users.Add(dekanatUser);
-				//db.Users.Add(adminUser);
+				foreach (Person pr in test_us)
+				{
+					Console.WriteLine($"{pr.Name}" + ": " + $"{ pr.AccessLevel}");
+				}
+				Console.WriteLine(new string('-',50));
+				var stud_group = from gr in db.Groups
+								 join sg in db.StudentGroups on gr.GroupId equals sg.GroupId
+								 join us in db.Users on sg.UserId equals us.UserId
+								 join acl in db.AccessLevels on us.AccessLevelId equals acl.AccessLevelId
+								 select new
+								 {
+									 Name = us.LastName + " " + us.FirstName,
+									 MName = !string.IsNullOrEmpty(us.MiddleName)? us.MiddleName : string.Empty,
+									 gr.GroupName,
+									 Al = acl.AccessLevelName
+								 };
+
+				/*string.IsNullOrEmpty(us.MiddleName) ? us.MiddleName : string.Empty*/
+				foreach (var item in stud_group)
+				{
+					Console.WriteLine($"{item.Name} {item.MName} {item.GroupName}  {item.Al}");
+				}
 			}
-
-
 			Console.WriteLine("Все сработало, вроде");
 			Console.ReadKey();
 		}
+	}
+	public class Person
+	{
+		public string Name { get; set; }
+		public string AccessLevel { get; set; }
 	}
 }

@@ -39,20 +39,19 @@ namespace ElectronicJournal_DataBase.Context.Configurations
 
 			//ограничения на Почту
 			builder.Property(u => u.Email)
-				.IsRequired()
 				.HasMaxLength(100);
-			builder.HasAlternateKey(u => u.Email);
+			//builder.HasAlternateKey(u => u.Email);
 
 			//ограничения на телефон
 			builder.Property(u => u.Phone)
-				.IsRequired()
-				.HasMaxLength(11);
-			builder.HasAlternateKey(u => u.Phone);
-			
+				.HasMaxLength(12);
+			//builder.HasAlternateKey(u => u.Phone);
 
-			//builder.HasOne(u=>u.AccessLevel)
-			//	.WithMany(al => al.Users)
-			//	.
+			//связь 1:1 с таблицей studentGroup
+			builder.HasOne(u => u.StudentGroup)
+				.WithOne(sg => sg.User)
+				.OnDelete(DeleteBehavior.Cascade);
+
 		}
 	}
 }

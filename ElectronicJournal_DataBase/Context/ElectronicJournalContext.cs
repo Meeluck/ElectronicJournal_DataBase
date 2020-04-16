@@ -8,7 +8,8 @@ namespace ElectronicJournal_DataBase.Context
 	{
 		public DbSet<User> Users { get; set; }
 		public DbSet<AccessLevel> AccessLevels { get; set; }
-
+		public DbSet<Group> Groups { get; set; }
+		public DbSet<StudentGroup> StudentGroups { get; set; }
 		public ElectronicJournalContext()
 		{
 			Database.EnsureDeleted();   // удаляем бд со старой схемой
@@ -25,13 +26,28 @@ namespace ElectronicJournal_DataBase.Context
 			// использование Fluent API
 			base.OnModelCreating(modelBuilder);
 
-			modelBuilder.ApplyConfiguration(new UserConfiguration());
+
+			#region Model Configuration
+			/* Конфигурация моделей:
+			 * - установка ограничений на атрибуты
+			 * - формирование связей между таблицами
+			 * - настройка каскадных действий
+			 */
 			modelBuilder.ApplyConfiguration(new AccessLevelConfiguration());
+			modelBuilder.ApplyConfiguration(new UserConfiguration());
+			modelBuilder.ApplyConfiguration(new StudentGroupConfiguration());
+			modelBuilder.ApplyConfiguration(new GroupConfiguration());
+			#endregion
+
+			#region Initialization database
+			//инициализация бд данными
 
 			modelBuilder.Entity<AccessLevel>().HasData(new Initialization_AccessLevel().Initialization);
 			modelBuilder.Entity<User>().HasData(new Initialization_User().Initialization);
+			modelBuilder.Entity<Group>().HasData(new Initialization_Group().Initialization);
 			
-
+			modelBuilder.Entity<StudentGroup>().HasData(new Initialization_StudentGroup().Initialization);
+			#endregion
 		}
 	}
 

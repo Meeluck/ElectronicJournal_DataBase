@@ -16,8 +16,9 @@ namespace ElectronicJournal_DataBase.Model
 
 		public int? AccessLevelId { get; set; } //внешний ключ 
 		public AccessLevel AccessLevel { get; set; } //навигациооне свойство для формирования связи 1:М
-
 		public string Phone { get; set; }
 		public string Email { get; set; }
+
+		public StudentGroup StudentGroup { get; set; }
 	}
 }
