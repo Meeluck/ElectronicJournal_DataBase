@@ -51,7 +51,10 @@ namespace ElectronicJournal_DataBase.Context.Configurations
 			builder.HasOne(u => u.StudentGroup)
 				.WithOne(sg => sg.User)
 				.OnDelete(DeleteBehavior.Cascade);
-
+			//связь 1:1 с таблицей Teacher
+			builder.HasOne(u => u.Teacher)
+				.WithOne(t => t.User)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

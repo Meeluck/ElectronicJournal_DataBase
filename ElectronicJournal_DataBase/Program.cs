@@ -19,6 +19,7 @@ namespace ElectronicJournal_DataBase
 					Console.WriteLine($"{level.AccessLevelId}" + ": " + $"{level.AccessLevelName}");
 				}
 
+				Console.WriteLine(new string('-', 50));
 				var test_us = db.Users.Select(us => new Person
 				{
 					Name = us.FirstName + " " + us.LastName,
@@ -36,19 +37,23 @@ namespace ElectronicJournal_DataBase
 								 join acl in db.AccessLevels on us.AccessLevelId equals acl.AccessLevelId
 								 select new
 								 {
+									 Userid = us.UserId,
 									 Name = us.LastName + " " + us.FirstName,
 									 MName = !string.IsNullOrEmpty(us.MiddleName)? us.MiddleName : string.Empty,
 									 gr.GroupName,
 									 Al = acl.AccessLevelName
 								 };
 
-				/*string.IsNullOrEmpty(us.MiddleName) ? us.MiddleName : string.Empty*/
+				
 				foreach (var item in stud_group)
 				{
-					Console.WriteLine($"{item.Name} {item.MName} {item.GroupName}  {item.Al}");
+					Console.WriteLine($" {item.Userid} {item.Name} {item.MName} {item.GroupName}  {item.Al}");
 				}
+				Console.WriteLine(new string('-',50));
+
+
 			}
-			Console.WriteLine("Все сработало, вроде");
+			//Console.WriteLine("Все сработало, вроде");
 			Console.ReadKey();
 		}
 	}

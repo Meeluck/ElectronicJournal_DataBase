@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
+﻿
 namespace ElectronicJournal_DataBase.Model
 {
 	public class User
@@ -20,5 +17,6 @@ namespace ElectronicJournal_DataBase.Model
 		public string Email { get; set; }
 
 		public StudentGroup StudentGroup { get; set; }
+		public Teacher Teacher { get; set; }
 	}
 }

@@ -10,6 +10,9 @@ namespace ElectronicJournal_DataBase.Context
 		public DbSet<AccessLevel> AccessLevels { get; set; }
 		public DbSet<Group> Groups { get; set; }
 		public DbSet<StudentGroup> StudentGroups { get; set; }
+		public DbSet<Position> Positions { get; set; }
+		public DbSet<Teacher> Teachers { get; set; }
+		
 		public ElectronicJournalContext()
 		{
 			Database.EnsureDeleted();   // удаляем бд со старой схемой
@@ -37,6 +40,8 @@ namespace ElectronicJournal_DataBase.Context
 			modelBuilder.ApplyConfiguration(new UserConfiguration());
 			modelBuilder.ApplyConfiguration(new StudentGroupConfiguration());
 			modelBuilder.ApplyConfiguration(new GroupConfiguration());
+			modelBuilder.ApplyConfiguration(new PositionConfiguration());
+			modelBuilder.ApplyConfiguration(new TeacherConfiguration());
 			#endregion
 
 			#region Initialization database
@@ -45,8 +50,10 @@ namespace ElectronicJournal_DataBase.Context
 			modelBuilder.Entity<AccessLevel>().HasData(new Initialization_AccessLevel().Initialization);
 			modelBuilder.Entity<User>().HasData(new Initialization_User().Initialization);
 			modelBuilder.Entity<Group>().HasData(new Initialization_Group().Initialization);
-			
 			modelBuilder.Entity<StudentGroup>().HasData(new Initialization_StudentGroup().Initialization);
+			modelBuilder.Entity<Position>().HasData(new Initialization_Position().Initialization);
+			modelBuilder.Entity<Teacher>().HasData(new Initialization_Teacher().Initialization);
+
 			#endregion
 		}
 	}
