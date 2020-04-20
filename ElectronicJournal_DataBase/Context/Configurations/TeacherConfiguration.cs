@@ -14,6 +14,9 @@ namespace ElectronicJournal_DataBase.Context.Configurations
 			//преподаватели должны быть уникальными
 			builder.HasAlternateKey(tc => tc.UserId);
 
+			builder.HasMany(tc => tc.TeacherLessons)
+				.WithOne(tl => tl.Teacher)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

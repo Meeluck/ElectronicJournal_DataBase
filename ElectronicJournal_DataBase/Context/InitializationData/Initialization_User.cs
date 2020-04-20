@@ -90,6 +90,9 @@ namespace ElectronicJournal_DataBase.Context.InitializationData
 			_initialization.AddRange(Dekanat3Fac());
 
 			_initialization.AddRange(Admins());
+
+			_initialization.AddRange(Group333());
+			_initialization.AddRange(Teachers316kaf());
 		}
 
 		public List<User> Initialization
@@ -144,6 +147,7 @@ namespace ElectronicJournal_DataBase.Context.InitializationData
 
 			return _group335;
 		}
+		
 		private List<User> Teachers319kaf()
 		{
 			List<User> teachers = new List<User>();
@@ -214,7 +218,61 @@ namespace ElectronicJournal_DataBase.Context.InitializationData
 
 			return admins;
 		}
+
+		private List<User> Group333()
+		{
+			List<User> group333 = new List<User>();
+
+			Password ps_Mayer = new Password("Mayer");
+			Password ps_Volkov = new Password("Volkov");
+
+			User Nikita_Mayer = new User
+			{
+				UserId = 13,
+				FirstName = "Никита",
+				LastName = "Майер",
+				Login = "Mayer",
+				PasswordHash = ps_Mayer.PasswordHash,
+				PasswordSalt = ps_Mayer.PasswordSalt,
+				AccessLevelId = 2
+			};
+			User Volkov_Ivan = new User
+			{
+				UserId = 14,
+				FirstName = "Иван",
+				LastName = "Волков",
+				Login = "Volkov",
+				PasswordHash = ps_Volkov.PasswordHash,
+				PasswordSalt = ps_Volkov.PasswordSalt,
+				AccessLevelId = 1
+			};
+			group333.Add(Nikita_Mayer);
+			group333.Add(Volkov_Ivan);
+
+			return group333;
+		}
+
+		private List<User > Teachers316kaf()
+		{
+			List<User> teachers = new List<User>();
+			Password ps_Semenov = new Password("Semenov");
+			//Semenov Grigory Evgenievich
+			User Semenov_Grigory = new User
+			{
+				UserId = 15,
+				FirstName = "Григорий",
+				MiddleName = "Евгеньевич",
+				LastName = "Семёнов",
+				Login = "Semenov_Grigory",
+				PasswordHash = ps_Semenov.PasswordHash,
+				PasswordSalt = ps_Semenov.PasswordSalt,
+				AccessLevelId = 3,
+			};
+			teachers.Add(Semenov_Grigory);
+			return teachers;
+		}
+
 		#endregion
-	
+
 	}
 }

@@ -4,7 +4,7 @@ using ElectronicJournal_DataBase.Context.Configurations;
 using ElectronicJournal_DataBase.Context.InitializationData;
 namespace ElectronicJournal_DataBase.Context
 {
-	public class ElectronicJournalContext :DbContext 
+	public class ElectronicJournalContext : DbContext
 	{
 		public DbSet<User> Users { get; set; }
 		public DbSet<AccessLevel> AccessLevels { get; set; }
@@ -12,6 +12,14 @@ namespace ElectronicJournal_DataBase.Context
 		public DbSet<StudentGroup> StudentGroups { get; set; }
 		public DbSet<Position> Positions { get; set; }
 		public DbSet<Teacher> Teachers { get; set; }
+		public DbSet<Building> Buildings { get; set; }
+		public DbSet<Classroom> Classrooms { get; set; }
+		public DbSet<LessonType> LessonTypes { get; set; }
+		public DbSet<Subject> Subjects { get; set; }
+		public DbSet<TimeSchedule> TimeSchedules { get; set; }
+		public DbSet<Lesson> Lessons { get; set; }
+		public DbSet<GroupLesson> GroupLessons { get; set; }
+		public DbSet<TeacherLesson> TeacherLessons { get; set; }
 		
 		public ElectronicJournalContext()
 		{
@@ -21,7 +29,7 @@ namespace ElectronicJournal_DataBase.Context
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ElectronicJournal_DataBase;Trusted_Connection=True;");
+			optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ElectronicalJournalDB;Trusted_Connection=True;");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -42,6 +50,14 @@ namespace ElectronicJournal_DataBase.Context
 			modelBuilder.ApplyConfiguration(new GroupConfiguration());
 			modelBuilder.ApplyConfiguration(new PositionConfiguration());
 			modelBuilder.ApplyConfiguration(new TeacherConfiguration());
+			modelBuilder.ApplyConfiguration(new BuildingConfiguration());
+			modelBuilder.ApplyConfiguration(new ClassroomConfiguration());
+			modelBuilder.ApplyConfiguration(new LessonTypeConfiguration());
+			modelBuilder.ApplyConfiguration(new SubjectConfiguration());
+			modelBuilder.ApplyConfiguration(new TimeScheduleConfiguration());
+			modelBuilder.ApplyConfiguration(new LessonConfiguration());
+			modelBuilder.ApplyConfiguration(new GroupLessonConfiguration());
+			modelBuilder.ApplyConfiguration(new TeacherLessonConfiguration());
 			#endregion
 
 			#region Initialization database
@@ -53,6 +69,14 @@ namespace ElectronicJournal_DataBase.Context
 			modelBuilder.Entity<StudentGroup>().HasData(new Initialization_StudentGroup().Initialization);
 			modelBuilder.Entity<Position>().HasData(new Initialization_Position().Initialization);
 			modelBuilder.Entity<Teacher>().HasData(new Initialization_Teacher().Initialization);
+			modelBuilder.Entity<Building>().HasData(new Initialization_Building().Initialization);
+			modelBuilder.Entity<Classroom>().HasData(new Initialization_Classroom().Initialization);
+			modelBuilder.Entity<TimeSchedule>().HasData(new Initialization_TimeSchedule().Initialization);
+			modelBuilder.Entity<Subject>().HasData(new Initialization_Subject().Initialization);
+			modelBuilder.Entity<LessonType>().HasData(new Initialization_LessonType().Initialization);
+			modelBuilder.Entity<Lesson>().HasData(new Initialization_Lesson().Initialization);
+			modelBuilder.Entity<GroupLesson>().HasData(new Initialization_GroupLesson().Initialization);
+			modelBuilder.Entity<TeacherLesson>().HasData(new Initialization_TeacherLesson().Initialization);
 
 			#endregion
 		}

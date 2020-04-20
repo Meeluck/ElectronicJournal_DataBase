@@ -16,7 +16,15 @@ namespace ElectronicJournal_DataBase.Context.InitializationData
 				GroupName = "М3О-335Б-17",
 				YearFormationGroup = new DateTime(2017, 7, 30)
 			};
+			Group gr333 = new Group
+			{
+				GroupId = 2,
+				GroupName = "М3О-333Б-17",
+				YearFormationGroup = new DateTime(2017, 7, 30)
+			};
+
 			_groups.Add(gr335);
+			_groups.Add(gr333);
 		}
 		public List<Group> Initialization
 		{

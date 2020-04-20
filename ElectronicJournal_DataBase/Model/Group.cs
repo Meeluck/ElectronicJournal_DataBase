@@ -18,7 +18,7 @@ namespace ElectronicJournal_DataBase.Model
 
 
 		public ICollection<StudentGroup> StudentGroups { get; set; }
-
+		public ICollection<GroupLesson> GroupLessons { get; set; }
 
 	}
 }

@@ -21,8 +21,15 @@ namespace ElectronicJournal_DataBase.Context.InitializationData
 				UserId = 10,
 				PositionId = 4
 			};
+			Teacher t3 = new Teacher()
+			{
+				TeacherId = 3,
+				UserId = 15,
+				PositionId = 4
+			};
 			_teachers.Add(t1);
 			_teachers.Add(t2);
+			_teachers.Add(t3);
 		}
 		public List<Teacher> Initialization
 		{

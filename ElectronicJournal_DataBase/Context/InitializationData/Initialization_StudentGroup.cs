@@ -27,10 +27,23 @@ namespace ElectronicJournal_DataBase.Context.InitializationData
 				UserId = 8,
 				GroupId = 1
 			};
+			StudentGroup sg4 = new StudentGroup
+			{
+				StudentGroupId = 4,
+				UserId = 13,
+				GroupId = 2
+			};
+			StudentGroup sg5 = new StudentGroup
+			{
+				StudentGroupId = 5,
+				UserId = 14,
+				GroupId = 2
+			};
 			_studentGroups.Add(sg1);
 			_studentGroups.Add(sg2);
 			_studentGroups.Add(sg3);
-
+			_studentGroups.Add(sg4);
+			_studentGroups.Add(sg5);
 		}
 		public List<StudentGroup> Initialization
 		{

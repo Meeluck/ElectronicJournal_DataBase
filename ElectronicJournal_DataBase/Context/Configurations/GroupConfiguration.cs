@@ -22,6 +22,11 @@ namespace ElectronicJournal_DataBase.Context.Configurations
 				.WithOne(sg => sg.Group)
 				.HasForeignKey(gr => gr.GroupId)
 				.OnDelete(DeleteBehavior.Cascade);
+
+			//связь M:1 с таблицей GroupLesson для формирования свящи М:М
+			builder.HasMany(gr => gr.GroupLessons)
+				.WithOne(gl => gl.Group)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }
