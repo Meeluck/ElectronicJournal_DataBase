@@ -24,13 +24,12 @@ namespace ElectronicJournal_DataBase.Context
 		
 		public ElectronicJournalContext()
 		{
-			Database.EnsureDeleted();   // удаляем бд со старой схемой
-			Database.EnsureCreated();   // создаем бд с новой схемой
+
 		}
 
 		protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
 		{
-			optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ElectronicalJournalDB;Trusted_Connection=True;");
+			optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=ElectronicalJournal_DataBase;Trusted_Connection=True;");
 		}
 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
