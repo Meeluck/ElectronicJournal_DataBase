@@ -1,4 +1,4 @@
-﻿
+﻿using System.Collections.Generic;
 namespace ElectronicJournal_DataBase.Model
 {
 	public class User
@@ -18,5 +18,7 @@ namespace ElectronicJournal_DataBase.Model
 
 		public StudentGroup StudentGroup { get; set; }
 		public Teacher Teacher { get; set; }
+
+		public ICollection<AcademicPerformance> AcademicPerformances { get; set; }
 	}
 }

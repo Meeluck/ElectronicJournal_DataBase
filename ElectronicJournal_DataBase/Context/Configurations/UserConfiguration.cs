@@ -55,6 +55,10 @@ namespace ElectronicJournal_DataBase.Context.Configurations
 			builder.HasOne(u => u.Teacher)
 				.WithOne(t => t.User)
 				.OnDelete(DeleteBehavior.Cascade);
+			//связь М:1 с таблицей упеваемоси
+			builder.HasMany(u => u.AcademicPerformances)
+				.WithOne(ap => ap.User)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

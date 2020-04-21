@@ -16,6 +16,9 @@ namespace ElectronicJournal_DataBase.Context.Configurations
 			builder.HasMany(l => l.TeacherLessons)
 				.WithOne(tl => tl.Lesson)
 				.OnDelete(DeleteBehavior.Cascade);
+			builder.HasMany(l => l.AcademicPerformances)
+				.WithOne(ap => ap.Lesson)
+				.OnDelete(DeleteBehavior.Cascade);
 		}
 	}
 }

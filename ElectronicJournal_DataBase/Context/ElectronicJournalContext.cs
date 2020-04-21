@@ -20,6 +20,7 @@ namespace ElectronicJournal_DataBase.Context
 		public DbSet<Lesson> Lessons { get; set; }
 		public DbSet<GroupLesson> GroupLessons { get; set; }
 		public DbSet<TeacherLesson> TeacherLessons { get; set; }
+		public DbSet<AcademicPerformance> AcademicPerformances { get; set; }
 		
 		public ElectronicJournalContext()
 		{
@@ -58,6 +59,8 @@ namespace ElectronicJournal_DataBase.Context
 			modelBuilder.ApplyConfiguration(new LessonConfiguration());
 			modelBuilder.ApplyConfiguration(new GroupLessonConfiguration());
 			modelBuilder.ApplyConfiguration(new TeacherLessonConfiguration());
+			modelBuilder.ApplyConfiguration(new AcademicPerformanceConfiguration());
+
 			#endregion
 
 			#region Initialization database

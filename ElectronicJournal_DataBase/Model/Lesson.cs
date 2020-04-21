@@ -22,5 +22,6 @@ namespace ElectronicJournal_DataBase.Model
 
 		public ICollection<GroupLesson> GroupLessons { get; set; }
 		public ICollection<TeacherLesson> TeacherLessons { get; set; }
+		public ICollection<AcademicPerformance> AcademicPerformances { get; set; }
 	}
 }
