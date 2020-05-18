@@ -16,7 +16,6 @@ namespace ElectronicJournal_DataBase.Context.Configurations
 			//год формирования группы
 			builder.Property(gr => gr.YearFormationGroup).IsRequired();
 
-			builder.Property(gr => gr.UserId).HasColumnName("StarostaId");
 			//связь М:1 с таблицей StudentGroup
 			builder.HasMany(gr => gr.StudentGroups)
 				.WithOne(sg => sg.Group)

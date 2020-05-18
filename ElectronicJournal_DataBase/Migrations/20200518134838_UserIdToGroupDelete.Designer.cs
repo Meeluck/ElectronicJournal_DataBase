@@ -4,14 +4,16 @@ using ElectronicJournal_DataBase.Context;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ElectronicJournal_DataBase.Migrations
 {
     [DbContext(typeof(ElectronicJournalContext))]
-    partial class ElectronicJournalContextModelSnapshot : ModelSnapshot
+    [Migration("20200518134838_UserIdToGroupDelete")]
+    partial class UserIdToGroupDelete
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
